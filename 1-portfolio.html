@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MY PORTFOLIO</title>
+  <style>
+    /* ---------- 1. VARIABLES (like #define constants in C) ---------- */
+    :root {
+     --bg: #faf9f6;       
+    --card: #ffffff;    
+    --muted: #64748b;    
+    --accent: #b45309; 
+    --line: #e2e8f0;
+    }
+
+    /* ---------- 2. RESET + BASE ---------- */
+    * { box-sizing: border-box; margin: 4; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Segoe UI, "system-ui", -apple-system, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); }
+    section { padding: 72px 20px; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    h2 { font-size: 1.8rem; margin-bottom: 24px; }
+
+    /* ---------- 3. NAVBAR ---------- */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+    }
+    nav {
+      max-width: 960px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--ink); }
+    nav ul { list-style: none; display: flex; gap: 24px; }
+    nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    nav ul a:hover { color: var(--accent); }
+    #menu-btn {
+      display: none; background: none; border: 1px solid var(--line);
+      border-radius: 6px; font-size: 1.3rem; padding: 2px 10px; cursor: pointer;
+    }
+
+    /* ---------- 4. HERO ---------- */
+    #home { padding-top: 96px; padding-bottom: 96px; }
+    #home .wrap { display: grid; grid-template-columns: 1fr 220px; gap: 40px; align-items: center; }
+    #home h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 12px; }
+    #home p { color: var(--muted); max-width: 52ch; margin-bottom: 24px; }
+    .btn {
+      display: inline-block; padding: 10px 22px; border-radius: 6px;
+      background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
+      border: 2px solid var(--accent); margin-right: 10px;
+    }
+    .btn.outline { background: transparent; color: var(--accent); }
+    .avatar {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; font-weight: 700;
+    }
+
+    /* ---------- 5. ABOUT ---------- */
+    #about { background: var(--card); }
+    #about p { max-width: 70ch; color: var(--muted); margin-bottom: 12px; }
+    .facts { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .facts div { border-left: 4px solid var(--accent); padding: 4px 12px; }
+    .facts strong { display: block; }
+
+    /* ---------- 6. SKILLS ---------- */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .skill-group { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+    .skill-group h3 { font-size: 1rem; margin-bottom: 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags span {
+      background: var(--bg); border: 1px solid var(--line);
+      padding: 3px 12px; border-radius: 20px; font-size: .9rem;
+    }
+
+    /* ---------- 7. PROJECTS ---------- */
+    #projects { background: var(--card); }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .project { border: 1px solid var(--line); border-radius: 8px; padding: 20px; background: var(--bg); }
+    .project h3 { margin-bottom: 6px; }
+    .project p { color: var(--muted); font-size: .95rem; margin-bottom: 10px; }
+    .project .stack { font-size: .85rem; color: var(--accent); font-weight: 600; }
+
+    /* ---------- 8. CONTACT ---------- */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .contact-info p { margin-bottom: 8px; color: var(--muted); }
+    form { display: grid; gap: 12px; }
+    input, textarea {
+      width: 100%; padding: 10px 12px; font: inherit;
+      border: 1px solid var(--line); border-radius: 6px; background: var(--card);
+    }
+    input:focus, textarea:focus, .btn:focus-visible, a:focus-visible, #menu-btn:focus-visible {
+      outline: 3px solid var(--accent); outline-offset: 2px;
+    }
+    button.btn { cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
+    #form-msg { color: var(--accent); font-weight: 600; min-height: 1.4em; }
+
+    footer { text-align: center; padding: 24px; color: var(--muted); border-top: 1px solid var(--line); background: var(--card); }
+
+    /* ---------- 9. RESPONSIVE (mobile) ---------- */
+    @media (max-width: 720px) {
+      #menu-btn { display: block; }
+      nav ul {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--card); border-bottom: 1px solid var(--line);
+      }
+      nav ul.open { display: flex; }
+      nav ul li a { display: block; padding: 12px 20px; }
+      #home .wrap, .contact-grid { grid-template-columns: 1fr; }
+      .avatar { width: 140px; height: 140px; font-size: 2.6rem; order: -1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header>
+    <nav>
+      <a class="logo" href="#home">Apurva Bhandari</a>
+      <button id="menu-btn" aria-label="Toggle menu">&#9776;</button>
+      <ul id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= HOME / HERO ================= -->
+    <section id="home">
+      <div class="wrap">
+        <div>
+          <h1>Hi, I'm Apurva Bhandari.<br>Aspiring Software Developer</h1>
+          <p>First-year B.Tech CSE student who likes turning logic into working programs, from C and Python to the web.</p>
+          <a class="btn" href="#projects">See my projects</a>
+          <a class="btn outline" href="#contact">Contact me</a>
+        </div>
+        <div class="avatar" aria-hidden="true">AB</div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
+      <div class="wrap">
+        <h2>About me</h2>
+        <p>I am a first-year B.Tech Computer Science and Engineering student. I enjoy solving problems step by step and turning ideas into small, working programs.</p>
+        <p>I started with C and Python, and now I am learning web development so that I can build projects people can actually use in a browser.</p>
+        <div class="facts">
+          <div><strong>Course</strong>B.Tech CSE, Semester 1</div>
+          <div><strong>Interests</strong>Programming, problem solving, web</div>
+          <div><strong>Goal</strong>Internship in software development</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills">
+      <div class="wrap">
+        <h2>Skills</h2>
+        <div class="skills">
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <div class="tags"><span>C</span><span>Python</span><span>C++ (basics)</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Web</h3>
+            <div class="tags"><span>HTML5</span><span>CSS3</span><span>JavaScript (learning)</span></div>
+          </div>
+          <div class="skill-group">
+            <h3>Tools</h3>
+            <div class="tags"><span>VS Code</span><span>Git</span><span>GitHub</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <div class="projects">
+          <article class="project">
+            <h3>Employee Payroll System</h3>
+            <p>Console program that stores employee records and calculates salaries using structures, arrays and functions.</p>
+            <a href="Employeepayroll.c">Project link</a><br>
+            <span class="stack">C</span>
+          </article>
+          <article class="project">
+            <h3>Bus Ticket Booking System</h3>
+            <p>Book and view bus seats, with records saved to a file so data stays after the program closes.</p>
+            <a href="mybusticket.c">Project link</a><br>
+            <span class="stack">C, file handling</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact">
+      <div class="wrap">
+        <h2>Contact me</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:yourname@example.com">yourname@example.com</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></p>
+            <p><strong>Location:</strong> Solan, India</p>
+          </div>
+
+          <form id="contact-form" novalidate>
+            <input type="text" id="name" placeholder="Your name" aria-label="Your name">
+            <input type="email" id="email" placeholder="Your email" aria-label="Your email">
+            <textarea id="message" rows="4" placeholder="Your message" aria-label="Your message"></textarea>
+            <button class="btn" type="submit">Send message</button>
+            <p id="form-msg" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>&copy; <span id="year"></span> Your Name. Built with HTML, CSS and JavaScript.</footer>
+
+  <script>
+    // ---- Mobile menu: show/hide the list when the button is clicked ----
+    const menuBtn = document.getElementById("menu-btn");
+    const menu = document.getElementById("menu");
+    menuBtn.addEventListener("click", function () {
+      menu.classList.toggle("open");
+    });
+    // close the menu after clicking a link
+    menu.addEventListener("click", function () { menu.classList.remove("open"); });
+
+    // ---- Contact form: simple validation (no real server) ----
+    const form = document.getElementById("contact-form");
+    const msg = document.getElementById("form-msg");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // stop the page from reloading
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const text = document.getElementById("message").value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (name === "" || text === "") {
+        msg.textContent = "Please fill in your name and message.";
+      } else if (!emailOk) {
+        msg.textContent = "Please enter a valid email address.";
+      } else {
+        msg.textContent = "Thanks, " + name + "! Your message is ready to send.";
+        form.reset();
+      }
+    });
+
+    // ---- Footer year ----
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
